@@ -1,5 +1,7 @@
 {
   "name": "trashy_card",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

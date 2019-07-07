@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SystemJsNgModuleLoader } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -15,6 +15,7 @@ export class AppComponent {
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+    
   }
 
   initializeApp() {
@@ -23,4 +24,5 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+  
 }
