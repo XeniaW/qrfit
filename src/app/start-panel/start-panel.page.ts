@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutesRecognized, RouterModule } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 
 
@@ -11,9 +12,21 @@ import { RoutesRecognized, RouterModule } from '@angular/router';
 })
 export class StartPanelPage implements OnInit {
 
-  constructor() { }
+  constructor(public loadingController: LoadingController) { }
 
   ngOnInit() {
+   
   }
-
+ 
+   async Loading() {
+    const loading = await this.loadingController.create({
+      animated: true,
+      spinner: "dots",
+      duration: 2000,
+      message: 'Please wait...',
+      translucent: true,
+      cssClass: 'custom-class custom-loading'
+    });
+    return await loading.present();
+  }
 }
