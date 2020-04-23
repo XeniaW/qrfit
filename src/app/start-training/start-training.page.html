@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="dark"> 
+    <div class="main-toolbar" padding>
+      <div class="ion-float-left"><img src="../assets/img/qr-logo-pixel-white.png"/></div>
+      <div class="ion-float-right">
+      <ion-buttons >
+   <ion-back-button  defaultHref=""  routerLink="/start-panel/training"  routerDirection="back" text="" icon="arrow-back" slot="end" color="light"></ion-back-button>
+   </ion-buttons>
+   </div>
+    </div>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Go Go Go!</h2>
+  <h1> {{time|async }} </h1> 
+
+  <ion-button color ="primary" (click) ="pauseTimer()">Pause</ion-button>
+  <ion-button color ="primary">Add Machine</ion-button>
+
+  <ion-button  class="finish-training-button" (click)="finishTraining()" expand="full">Finish Training</ion-button>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="dark"> 
+    <div class="main-toolbar" padding>
+      <div class="ion-float-left"><img src="../assets/img/qr-logo-pixel-white.png"/></div>
+      <div class="ion-float-right">
+      <ion-buttons >
+   <ion-back-button  defaultHref=""  routerLink="/start-panel/training"  routerDirection="back" text="" icon="arrow-back" slot="end" color="light"></ion-back-button>
+   </ion-buttons>
+   </div>
+    </div>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let training of Trainings" class="user-list">
+    <ion-label>
+      <h5>
+        <ion-icon name="person"></ion-icon> {{training.createdAt[0]}}
+      </h5>
+      <p>
+        <ion-icon name="call"></ion-icon> {{training.$key}} 
+      </p>
+    </ion-label>
+
+    <div class="item-note" item-end>
+      <button ion-button clear (click)="deleteTraining(training.$key)">
+        <ion-icon name="trash" style="zoom:2.0"></ion-icon>
+      </button>
+    </div>
+  </ion-item>
+ 
+
+</ion-content>

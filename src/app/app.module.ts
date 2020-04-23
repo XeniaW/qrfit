@@ -11,19 +11,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import {IonicGestureConfig} from './ion-gestures-config';
 
+//firebase modules
+import {AngularFireModule} from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule} from '@angular/fire/storage';
+
+//environment
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   schemas:  [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig), AngularFireModule, AngularFireDatabaseModule, AngularFireStorageModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: IonicGestureConfig
   },
+
   ],
   bootstrap: [AppComponent]
 })

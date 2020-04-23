@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {TrainingSession} from '../sessions/training-session';
+import {TrainingSesionsService} from '../sessions/training-sessions.service';
+
+
 
 @Component({
   selector: 'app-training',
@@ -6,10 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./training.page.scss'],
 })
 export class TrainingPage implements OnInit {
+  Trainings = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private sesService: TrainingSesionsService
+  ) {
+ 
   }
 
+  ngOnInit() {
+    let trainingRes = this.sesService.getSessionList();  
+  }
 }
