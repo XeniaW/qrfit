@@ -1,6 +1,6 @@
 import {Component,OnInit} from '@angular/core';
-import {TrainingSession} from '../sessions/training-session';
-import {TrainingSesionsService} from '../sessions/training-sessions.service';
+import {TrainingSession} from '../training-sessions/training-session';
+import {TrainingSesionsService} from '../training-sessions/training-sessions.service';
 
 
 
@@ -19,6 +19,6 @@ export class TrainingPage implements OnInit {
   }
 
   ngOnInit() {
-    let trainingRes = this.sesService.getSessionList();  
+    let trainingRes = this.sesService.getTrainingSessionList();  
   }
 }

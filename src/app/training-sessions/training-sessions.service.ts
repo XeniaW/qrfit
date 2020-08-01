@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {TrainingSession} from '../sessions/training-session';
+import {TrainingSession} from '../training-sessions/training-session';
 import {AngularFireDatabase, AngularFireList, AngularFireObject} from '@angular/fire/database';
 
 
@@ -15,30 +15,30 @@ export class TrainingSesionsService {
 
 
   //create session
-  createSession(ses: TrainingSession) {
+  createTrainingSession(ses: TrainingSession) {
      return this.trainingListRef.push({
         createdAt: ses.createdAt,
       });
 
   }
   //Get Single
-  getSession(id: string) {
+  getTrainingSession(id: string) {
     this.trainingRef = this.db.object('/training-sessions/' + id);
     return this.trainingRef;
   }
   //Get List
-  getSessionList() {
+  getTrainingSessionList() {
     this.trainingListRef = this.db.list('/training-sessions');
     return this.trainingListRef;
   }
   //Update
-    updateSession(id, ses:TrainingSession) {
+    updateTrainingSession(id, ses:TrainingSession) {
       return this.trainingRef.update({
         endedAt: ses.endedAt
       })
   }
   //Delete
-    deleteTraining (id: string) {
+    deleteTrainingSession (id: string) {
       this.trainingRef = this.db.object('/training-sessions/' + id);
       this.trainingRef.remove();
     }

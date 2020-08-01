@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingSesionsService } from "../sessions/training-sessions.service";
-import { TrainingSession } from '../sessions/training-session';
+import { TrainingSesionsService } from "../training-sessions/training-sessions.service";
+import { TrainingSession } from '../training-sessions/training-session';
 
 @Component({
   selector: 'app-view-trainings',
@@ -16,19 +16,21 @@ export class ViewTrainingsPage implements OnInit {
 
   ngOnInit() {
     this.fetchSessions();
-    let trainingRes = this.sesService.getSessionList();
+    let trainingRes = this.sesService.getTrainingSessionList();
     trainingRes.snapshotChanges().subscribe(res => {
+      
       this.Trainings = [];
       res.forEach(item => {
         let a = item.payload.toJSON();
         a['$key'] = item.key;
         this.Trainings.push(a as TrainingSession);
       })
+      console.log(this.Trainings);
     })
 
   }
   fetchSessions() {
-    this.sesService.getSessionList().valueChanges().subscribe(res=> {
+    this.sesService.getTrainingSessionList().valueChanges().subscribe(res=> {
       this.Trainings  = res ;
       console.log(this.Trainings);
     });
@@ -37,7 +39,7 @@ export class ViewTrainingsPage implements OnInit {
   deleteTraining(id) {
     console.log(id)
     if (window.confirm('Do you really want to delete?')) {
-      this.sesService.deleteTraining(id)
+      this.sesService.deleteTrainingSession(id)
     }
   }
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "395024368828",
+    "firebase_url": "https://qrfit-2cd90.firebaseio.com",
+    "project_id": "qrfit-2cd90",
+    "storage_bucket": "qrfit-2cd90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395024368828:android:66ec1bc9e6b203138afcb9",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395024368828-st5uls63ni3no5dkrjvoimg4ripg6dnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQ7d4bU5g9yJyEyL8fYX6yyfKemPl1o1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395024368828-st5uls63ni3no5dkrjvoimg4ripg6dnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

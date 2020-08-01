@@ -3,6 +3,7 @@
     <div class="main-toolbar" padding>
       <div class="ion-float-left"><img src="../assets/img/qr-logo-pixel-white.png"/></div>
       <div class="ion-float-right">
+        <h1> {{time|async}} </h1> 
       <ion-buttons >
    <ion-back-button  defaultHref=""  routerLink="/start-panel/training"  routerDirection="back" text="" icon="arrow-back" slot="end" color="light"></ion-back-button>
    </ion-buttons>
@@ -13,10 +14,26 @@
 
 <ion-content padding>
   <h2>Go Go Go!</h2>
-  <h1> {{time|async }} </h1> 
+ 
 
   <ion-button color ="primary" (click) ="pauseTimer()">Pause</ion-button>
-  <ion-button color ="primary">Add Machine</ion-button>
+  <ion-button color ="primary" name="qr-scanner" (click) = "startScan()">Add Machine</ion-button>
+  <ion-button color ="primary" (click) ="reset()" *ngIf = "scanResult">Reset</ion-button>
+
+<!-- Shows our camera stream -->
+<video #video [hidden]="!scanActive" width="100%"></video>
+    <!-- Used to render the camera stream images -->
+    <canvas #canvas hidden></canvas>
+  
+  <ion-button color="danger" (click)="stopScan()" *ngIf ="scanActive">Stop Scan</ion-button>
+  <ion-card *ngIf="scanResult">
+    <ion-card-header>
+      <ion-card-title>QR Code</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ scanResult }}
+    </ion-card-content>
+  </ion-card>
 
   <ion-button  class="finish-training-button" (click)="finishTraining()" expand="full">Finish Training</ion-button>
 </ion-content>
