@@ -18,6 +18,7 @@ export class TrainingSesionsService {
   createTrainingSession(ses: TrainingSession) {
      return this.trainingListRef.push({
         createdAt: ses.createdAt,
+        endedAt: ses.endedAt,
       });
 
   }
@@ -42,4 +43,13 @@ export class TrainingSesionsService {
       this.trainingRef = this.db.object('/training-sessions/' + id);
       this.trainingRef.remove();
     }
+
+    // finish Timestamp
+    finishTrainingSession(id, ses:TrainingSession) {
+      this.trainingRef = this.db.object('/training-sessions/' + id);
+      return this.trainingRef.update({
+        endedAt: ses.endedAt
+      })
+    }
+
 }

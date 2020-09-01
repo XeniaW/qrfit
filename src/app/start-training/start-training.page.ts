@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { TrainingSesionsService } from "../training-sessions/training-sessions.service";
+import {TrainingSession} from '../training-sessions/training-session';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import jsQR from 'jsqr';
+import { idText } from 'typescript';
+
+
 
 
 
@@ -20,10 +24,15 @@ function format(ms) {
   styleUrls: ['./start-training.page.scss'],
 })
 export class StartTrainingPage implements OnInit {
+    id: any;
+    ses: TrainingSesionsService;
+    sesKey: any;
+
     time: BehaviorSubject<string> = new BehaviorSubject('00:00');
     timer: number;
     interval;
     startTrainingDate;
+    finishTrainingDate;
     scanActive = false;
     scanResult = null;
     @ViewChild('video', {static: false}) video: ElementRef;
@@ -35,7 +44,11 @@ export class StartTrainingPage implements OnInit {
     loading: HTMLIonLoadingElement;
 
   
-  constructor( private sesService: TrainingSesionsService, private toastCtrl: ToastController, private loadingCtrl: LoadingController) {}
+  constructor( private sesService: TrainingSesionsService, private toastCtrl: ToastController, private loadingCtrl: LoadingController) {
+    
+   
+
+  }
 
     ngAfterViewInit() {
       this.videoElement = this.video.nativeElement;
@@ -160,31 +173,53 @@ export class StartTrainingPage implements OnInit {
 
    
   ngOnInit() {
-
-    this.startTimer(0);
-
-    let TimeStart = new Date().getTime();
-    this.startTrainingDate =  ({
-      createdAt: [TimeStart]
-    });
-   
-    console.log(this.startTrainingDate.createdAt);
-    console.log(this.sesService.trainingListRef);
-    this.sesService.createTrainingSession(this.startTrainingDate).then(res => {
-      console.log(res);      
-    })
-    .catch(error => console.log(error)); 
-    
-  }
- 
-  finishTraining() {
-    let finishTrainingDate = Date.now();
-    let total = finishTrainingDate - this.startTrainingDate.createdAt;
-    console.log(total);
     
     
   
- 
+    this.startTimer(0);
+    let TimeStart = new Date().getTime();
+    this.startTrainingDate =  ({
+      createdAt: [TimeStart],
+      endedAt: [0],
+    });
+   
+    console.log(this.startTrainingDate.createdAt);
+    console.log(this.startTrainingDate.endedAt);
+    this.createNewTrainingSession();
+  
+  }
+  
+  
+  createNewTrainingSession() {
+    this.sesService.createTrainingSession(this.startTrainingDate).then(res => {
+      console.log(res);     
+      console.log(res.key); 
+      this.getSessionKey(res.key);
+    
+    })
+    .catch(error => console.log(error)); 
+  }
+
+  getSessionKey(key) {
+    this.sesKey = key;
+} 
+
+  finishTraining() {
+    let finishTrainingDate = Date.now();
+    let total = finishTrainingDate - this.startTrainingDate.createdAt;
+    this.finishTrainingDate = ({
+      endedAt: [total]
+    });
+
+  
+    if (window.confirm('Do you wish to end this training?')) {
+      this.sesService.finishTrainingSession(this.sesKey, this.finishTrainingDate)
+      .then( (res) => {
+        console.log(res)
+      });
+    }
+    
+
    }
 
 }

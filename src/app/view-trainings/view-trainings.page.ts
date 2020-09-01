@@ -28,10 +28,12 @@ export class ViewTrainingsPage implements OnInit {
       console.log(this.Trainings);
     })
 
+    
+
   }
   fetchSessions() {
     this.sesService.getTrainingSessionList().valueChanges().subscribe(res=> {
-      this.Trainings  = res ;
+      // this.Trainings  = res ;
       console.log(this.Trainings);
     });
  
