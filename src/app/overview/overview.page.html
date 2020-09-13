@@ -1,11 +1,29 @@
 <ion-header>
-    <ion-toolbar color="dark"> 
-     <div class="main-toolbar" padding>
-       <div class="ion-float-left"><img src="../assets/img/qr-logo-pixel-white.png"/></div>
-     </div>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="dark"> 
+   <div class="main-toolbar" padding>
+     <div class="ion-float-left"><img src="../assets/img/qr-logo-pixel-white.png"/></div>
+     <div class="ion-float-right">
+  </div>
+   </div>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-<ion-label padding>Overview</ion-label>
+
+
+<ion-item *ngFor="let machine of Machines" class="user-list">
+
+  <ion-thumbnail slot="start">
+    <img src="{{machine.image}}">
+  </ion-thumbnail>
+  <ion-label>
+  <h5>
+    {{machine.name}}
+  </h5>
+  <p>
+    {{machine.muscles|json}}
+  </p>
+</ion-label>
+
+</ion-item>
 </ion-content>

@@ -17,7 +17,7 @@
   <h2>Go Go Go!</h2>
  
 
-  <ion-button color ="primary" (click) ="pauseTimer()">Pause</ion-button>
+  <ion-button color ="primary" (click) ="pauseTimer()">{{text}}</ion-button>
   <ion-button color ="primary" name="qr-scanner" (click) = "startScan()">Add Machine</ion-button>
   <ion-button color ="primary" (click) ="reset()" *ngIf = "scanResult">Reset</ion-button>
 

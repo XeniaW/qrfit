@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BehaviorSubject } from "rxjs";
 import { TrainingSesionsService } from "../training-sessions/training-sessions.service";
-import {TrainingSession} from '../training-sessions/training-session';
 import { ToastController, LoadingController, Platform } from '@ionic/angular';
 import jsQR from 'jsqr';
-import { idText } from 'typescript';
+
+
 
 
 
@@ -37,6 +37,7 @@ export class StartTrainingPage implements OnInit {
     scanResult = null;
     @ViewChild('video', {static: false}) video: ElementRef;
     @ViewChild ('canvas', {static: false}) canvas: ElementRef;
+    text: string = 'Pause';
    
     canvasElement: any;
     videoElement: any;
@@ -150,8 +151,22 @@ export class StartTrainingPage implements OnInit {
         this.updateTimeValue();
       }, 1000);
     }
-    pauseTimer () {
-      
+    
+    pauseTimer (text): void {
+      if(this.text === 'Pause') { 
+        this.text = 'Continue';
+        clearInterval(this.interval);
+      } else {
+        this.text = 'Pause';
+        this.interval =  setInterval( () => {
+          this.updateTimeValue();
+        }, 1000);
+      }
+
+    }
+
+    stopTimer() {
+     
     }
 
     updateTimeValue() {
@@ -215,6 +230,7 @@ export class StartTrainingPage implements OnInit {
     if (window.confirm('Do you wish to end this training?')) {
       this.sesService.finishTrainingSession(this.sesKey, this.finishTrainingDate)
       .then( (res) => {
+        this.stopTimer();
         console.log(res)
       });
     }

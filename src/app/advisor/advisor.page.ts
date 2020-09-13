@@ -229,7 +229,7 @@ export class AdvisorPage implements OnInit, AfterViewInit {
      DOMElement.runtime.resetView(); 
   }
   goToMachines() {
-    this.router.navigate(['/machines']);;
+    this.router.navigate(['/start-panel/overview']);
   }
 }
 
